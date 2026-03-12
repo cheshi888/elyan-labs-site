@@ -1,0 +1,171 @@
+# Git Attributes Configuration
+# This file defines how Git treats different file types
+
+# Auto-detect text files and normalize line endings to LF
+* text=auto eol=lf
+
+# Binary files that should not be modified
+*.{png,jpg,jpeg,gif,bmp,ico,svg,webp} binary
+*.{pdf,doc,docx,xls,xlsx,ppt,pptx} binary
+*.{zip,rar,7z,tar,gz,bz2,xz} binary
+*.{exe,dll,so,dylib} binary
+*.{mp3,mp4,avi,mov,wmv,flv,mkv} binary
+*.{woff,woff2,ttf,otf,eot} binary
+
+# Source code files (treat as text, diff with appropriate language)
+*.{c,h,cpp,hpp,cc} diff=cpp
+*.{java} diff=java
+*.{py,pyw} diff=python
+*.{js,jsx} diff=javascript
+*.{ts,tsx} diff=typescript
+*.{css,scss,less,sass} diff=css
+*.{html,htm} diff=html
+*.{xml,xsd,xsl,xslt} diff=xml
+*.{json,json5,jsonc} diff=json
+*.{yml,yaml} diff=yaml
+*.{md,markdown,mdown,mkd} diff=markdown
+*.{rst,adoc} diff=asciidoc
+*.{sql} diff=sql
+*.{sh,bash} diff=bash
+*.{rb} diff=ruby
+*.{php} diff=php
+*.{go} diff=golang
+*.{rs} diff=rust
+*.{swift} diff=swift
+*.{kt,kts} diff=kotlin
+*.{dart} diff=dart
+*.{lua} diff=lua
+*.{pl,pm} diff=perl
+*.{tex,sty,cls} diff=tex
+*.{bib} diff=bibtex
+*.{sol} diff=solidity
+*.{vy} diff=vyper
+*.{vue} diff=vue
+*.{svelte} diff=svelte
+*.{astro} diff=astro
+*.{graphql,gql} diff=graphql
+*.{proto} diff=protobuf
+
+# Files that should use CRLF line endings (Windows-specific)
+*.{bat,cmd} text eol=crlf
+*.{ps1} text eol=crlf
+*.{reg} text eol=crlf
+
+# Makefiles must use tabs
+Makefile text eol=lf
+*.mk text eol=lf
+
+# Docker files
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+
+# Git files
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.gitmodules text eol=lf
+
+# Editor configuration files
+.editorconfig text eol=lf
+.prettierrc text eol=lf
+.prettierrc.{js,json,yml,yaml} text eol=lf
+.eslintrc text eol=lf
+.eslintrc.{js,json,yml,yaml} text eol=lf
+
+# Configuration files
+*.{conf,cfg,ini} text eol=lf
+*.{toml} text eol=lf
+*.{env} text eol=lf
+
+# Documentation
+LICENSE* text eol=lf
+README* text eol=lf
+CHANGELOG* text eol=lf
+CONTRIBUTING* text eol=lf
+CODE_OF_CONDUCT* text eol=lf
+AUTHORS* text eol=lf
+
+# Lock files (should be treated as generated)
+package-lock.json binary
+yarn.lock binary
+pnpm-lock.yaml binary
+composer.lock binary
+Cargo.lock binary
+Poetry.lock binary
+Pipfile.lock binary
+
+# Generated files that should not be committed
+dist/ export-ignore
+build/ export-ignore
+out/ export-ignore
+.target/ export-ignore
+.next/ export-ignore
+.nuxt/ export-ignore
+.cache/ export-ignore
+node_modules/ export-ignore
+__pycache__/ export-ignore
+*.pyc export-ignore
+*.pyo export-ignore
+*.pyd export-ignore
+.DS_Store export-ignore
+Thumbs.db export-ignore
+
+# Linguist overrides (for GitHub language detection)
+# Force specific files to be counted as certain languages
+*.js linguist-language=JavaScript
+*.jsx linguist-language=JavaScript
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
+*.py linguist-language=Python
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.scss linguist-language=CSS
+*.less linguist-language=CSS
+*.json linguist-language=JSON
+*.md linguist-language=Markdown
+*.yml linguist-language=YAML
+*.yaml linguist-language=YAML
+*.xml linguist-language=XML
+*.sql linguist-language=SQL
+*.sh linguist-language=Shell
+*.bash linguist-language=Shell
+*.sol linguist-language=Solidity
+*.vy linguist-language=Vyper
+
+# Diff and merge strategies
+*.{js,jsx,ts,tsx} merge=union
+*.{css,scss,less,sass} merge=union
+*.{html,htm} merge=union
+*.{json,json5,jsonc} merge=union
+*.{yml,yaml} merge=union
+*.{xml,xsd,xsl,xslt} merge=union
+*.{md,markdown,mdown,mkd} merge=union
+
+# Export-ignore patterns for git archive
+# Files/directories to exclude from source archives
+.github/ export-ignore
+.gitlab/ export-ignore
+.circleci/ export-ignore
+.travis.yml export-ignore
+.vscode/ export-ignore
+.idea/ export-ignore
+*.swp export-ignore
+*.swo export-ignore
+*~ export-ignore
+*.log export-ignore
+npm-debug.log* export-ignore
+yarn-debug.log* export-ignore
+yarn-error.log* export-ignore
+
+# Filter definitions for clean/smudge filters
+# (uncomment and configure if needed)
+# *.js filter=prettier
+# *.ts filter=prettier
+# *.css filter=prettier
+# *.html filter=prettier
+# *.json filter=prettier
+# *.md filter=prettier
+
+# Bounty task information
+# This .gitattributes file was created as part of a bounty task
+# Bounty Task: [EASY BOUNTY: 1 RTC] Add a .gitattributes file to any repo missing one (Issue #1628)
+# Payment Address for Bounty: ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999 or TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk

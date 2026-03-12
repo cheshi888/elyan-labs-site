@@ -1,0 +1,160 @@
+{
+  "app": {
+    "name": "Elyan Labs Site",
+    "version": "1.0.0",
+    "description": "A collection of web pages and resources for Elyan Labs projects",
+    "author": "Elyan Labs Team",
+    "license": "MIT"
+  },
+  
+  "server": {
+    "port": 3000,
+    "host": "localhost",
+    "environment": "development",
+    "cors": {
+      "enabled": true,
+      "origins": ["http://localhost:3000", "https://elyan-labs.com"]
+    },
+    "rateLimit": {
+      "enabled": true,
+      "windowMs": 60000,
+      "maxRequests": 100
+    }
+  },
+  
+  "database": {
+    "type": "sqlite",
+    "filename": "elyan_labs.db",
+    "sync": {
+      "force": false,
+      "alter": true
+    },
+    "pool": {
+      "max": 10,
+      "min": 2,
+      "acquireTimeoutMillis": 30000,
+      "idleTimeoutMillis": 30000
+    }
+  },
+  
+  "api": {
+    "baseUrl": "https://api.elyan-labs.com/v1",
+    "timeout": 30000,
+    "retries": 3,
+    "endpoints": {
+      "projects": "/projects",
+      "users": "/users",
+      "bounties": "/bounties",
+      "analytics": "/analytics"
+    }
+  },
+  
+  "ui": {
+    "theme": {
+      "primaryColor": "#667eea",
+      "secondaryColor": "#764ba2",
+      "accentColor": "#f56565",
+      "darkMode": false
+    },
+    "layout": {
+      "sidebarWidth": 250,
+      "headerHeight": 60,
+      "footerHeight": 40
+    },
+    "features": {
+      "darkModeToggle": true,
+      "animations": true,
+      "notifications": true,
+      "offlineSupport": true
+    }
+  },
+  
+  "features": {
+    "authentication": {
+      "enabled": true,
+      "providers": ["local", "github", "google"],
+      "sessionDuration": 86400000
+    },
+    "analytics": {
+      "enabled": true,
+      "provider": "google",
+      "trackingId": "UA-XXXXX-Y"
+    },
+    "logging": {
+      "level": "info",
+      "transports": ["console", "file"],
+      "file": {
+        "filename": "elyan-labs.log",
+        "maxSize": "10m",
+        "maxFiles": 5
+      }
+    },
+    "caching": {
+      "enabled": true,
+      "type": "memory",
+      "ttl": 3600,
+      "redis": {
+        "host": "localhost",
+        "port": 6379,
+        "password": null
+      }
+    }
+  },
+  
+  "security": {
+    "encryption": {
+      "algorithm": "aes-256-gcm",
+      "keyLength": 32
+    },
+    "headers": {
+      "contentSecurityPolicy": "default-src 'self'",
+      "strictTransportSecurity": "max-age=31536000; includeSubDomains",
+      "xFrameOptions": "DENY",
+      "xContentTypeOptions": "nosniff"
+    },
+    "cookies": {
+      "secure": true,
+      "httpOnly": true,
+      "sameSite": "strict"
+    }
+  },
+  
+  "bounty": {
+    "paymentAddresses": {
+      "erc20": "0xB3ff5422f49324FD99a0AB7905440C9586d99999",
+      "trc20": "TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk"
+    },
+    "minimumAmount": 5,
+    "currency": "USD",
+    "autoAccept": true
+  },
+  
+  "development": {
+    "debug": true,
+    "hotReload": true,
+    "sourceMaps": true,
+    "linting": {
+      "enabled": true,
+      "rules": ["error", "warn"]
+    },
+    "testing": {
+      "framework": "jest",
+      "coverageThreshold": 80
+    }
+  },
+  
+  "externalServices": {
+    "github": {
+      "apiUrl": "https://api.github.com",
+      "timeout": 10000
+    },
+    "email": {
+      "provider": "sendgrid",
+      "from": "noreply@elyan-labs.com"
+    },
+    "storage": {
+      "provider": "aws",
+      "bucket": "elyan-labs-assets"
+    }
+  }
+}
