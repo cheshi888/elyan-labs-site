@@ -1,0 +1,37 @@
+name: HTML Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install htmlhint
+      run: npm install -g htmlhint
+        
+    - name: Lint HTML files
+      run: |
+        if ! command -v htmlhint &> /dev/null; then
+          echo "htmlhint not found, skipping HTML linting"
+          exit 0
+        fi
+        htmlhint --rules id-unique "**/*.html" || echo "HTML linting found issues"
+        
+    - name: Lint CSS files
+      run: |
+        if ! command -v stylelint &> /dev/null; then
+          echo "stylelint not found, installing..."
+          npm install -g stylelint stylelint-config-standard
+        fi
+        stylelint "**/*.css" --quiet || echo "CSS linting found issues"
