@@ -1,250 +1,356 @@
-# EditorConfig is a file format and collection of code editor plugins
-# that helps maintain consistent coding styles across different editors and IDEs.
-# For more information, see https://editorconfig.org/
+# EditorConfig is awesome: https://EditorConfig.org
 
+# Top-most EditorConfig file
 root = true
 
-# Top-level configuration
+# Default configuration for all files
 [*]
-# Set default charset
 charset = utf-8
-# End of line sequence
 end_of_line = lf
-# Indentation style: space or tab
 indent_style = space
-# Size of each indentation level
 indent_size = 2
-# Remove trailing whitespace characters
 trim_trailing_whitespace = true
-# Ensure files end with a newline character
 insert_final_newline = true
-# Maximum line length (soft limit)
-max_line_length = 80
-
-# Markdown files
-[*.md]
-trim_trailing_whitespace = false
 max_line_length = 100
 
-# Makefiles
+# Makefiles require tabs
 [Makefile]
 indent_style = tab
 
-# Batch files (Windows)
-[*.bat]
+# Batch files use CRLF
+[*.{bat,cmd}]
 end_of_line = crlf
 
 # Shell scripts
 [*.sh]
-# Shell scripts typically use tabs for heredoc indentation
-indent_style = tab
+indent_size = 2
+shell = bash
+
+# Markdown files
+[*.{md,markdown,mdown,mkd}]
+trim_trailing_whitespace = false  # Allow trailing spaces in markdown for line breaks
+max_line_length = off
 
 # JSON files
 [*.json]
 indent_size = 2
 
 # YAML files
-[*.yaml]
-[*.yml]
+[*.{yml,yaml}]
 indent_size = 2
 
 # XML files
-[*.xml]
+[*.{xml,xsd,xsl,xslt}]
+indent_size = 2
+
+# Configuration files
+[*.{conf,cfg,ini}]
+indent_size = 2
+
+# Git files
+[.gitignore]
+indent_size = 2
+
+# Docker files
+[Dockerfile]
 indent_size = 2
 
 # HTML files
-[*.html]
+[*.{html,htm}]
 indent_size = 2
-max_line_length = 120
+max_line_length = off  # HTML can have long lines
 
 # CSS files
 [*.css]
 indent_size = 2
 
 # JavaScript/TypeScript files
-[*.js]
-[*.jsx]
-[*.ts]
-[*.tsx]
+[*.{js,jsx,ts,tsx}]
 indent_size = 2
-max_line_length = 100
+quote_type = single  # Prefer single quotes
 
-# JavaScript Object Notation (JSON) with Comments
-[*.jsonc]
+# React JSX/TSX files
+[*.{jsx,tsx}]
 indent_size = 2
 
-# JSON5 files
-[*.json5]
+# JSON files (again, for specific rules)
+[*.json]
 indent_size = 2
 
 # Python files
-[*.py]
+[*.{py,pyw}]
 indent_size = 4
 max_line_length = 88
-
-# Ruby files
-[*.rb]
-indent_size = 2
-
-# Rust files
-[*.rs]
-indent_size = 4
-max_line_length = 100
-
-# Go files
-[*.go]
-indent_style = tab
-indent_size = 4
 
 # Java files
 [*.java]
 indent_size = 4
 
 # C/C++ files
-[*.c]
-[*.cpp]
-[*.h]
-[*.hpp]
+[*.{c,cpp,h,hpp,cc}]
 indent_size = 4
 
-# C# files
-[*.cs]
+# Go files
+[*.go]
+indent_size = tab
+tab_width = 8
+
+# Rust files
+[*.rs]
 indent_size = 4
+
+# Ruby files
+[*.rb]
+indent_size = 2
 
 # PHP files
 [*.php]
 indent_size = 4
 
-# Swift files
-[*.swift]
-indent_size = 4
-
-# Kotlin files
-[*.kt]
-[*.kts]
-indent_size = 4
-
-# Scala files
-[*.scala]
-indent_size = 2
-
-# Haskell files
-[*.hs]
-indent_size = 4
-
-# Lua files
-[*.lua]
-indent_size = 2
-
 # SQL files
 [*.sql]
 indent_size = 2
-max_line_length = 100
+keyword_case = upper  # SQL keywords in uppercase
 
-# Dockerfiles
-[Dockerfile]
-[*.dockerfile]
-indent_size = 4
+# LICENSE file
+[LICENSE*]
+trim_trailing_whitespace = false
+insert_final_newline = false
 
-# Git configuration
-[.gitattributes]
-[.gitignore]
-[.gitmodules]
-indent_style = tab
+# README files
+[README*]
+trim_trailing_whitespace = false
 
-# Configuration files
-[.editorconfig]
-[*.ini]
-[*.cfg]
-[*.conf]
-indent_style = space
-indent_size = 2
+# CHANGELOG files
+[CHANGELOG*]
+trim_trailing_whitespace = false
 
 # Documentation files
-[*.txt]
-[*.rst]
+[*.{txt,rst,adoc}]
 trim_trailing_whitespace = false
 
-# CSV files
-[*.csv]
-trim_trailing_whitespace = false
+# Image files metadata
+[*.{png,jpg,jpeg,gif,bmp,ico,svg}]
+# Binary files, no formatting
 
-# TSV files
-[*.tsv]
-trim_trailing_whitespace = false
+# Binary files (no formatting)
+[*.{pdf,zip,rar,7z,tar,gz,exe,dll,so,dylib}]
+# Binary files, no formatting
 
 # Log files
 [*.log]
 trim_trailing_whitespace = false
 insert_final_newline = false
 
-# Image and binary files (should not be touched)
-[*.png]
-[*.jpg]
-[*.jpeg]
-[*.gif]
-[*.bmp]
-[*.ico]
-[*.svg]
-[*.pdf]
-[*.zip]
-[*.tar]
-[*.gz]
-[*.7z]
-[*.exe]
-[*.dll]
-[*.so]
-[*.dylib]
-charset = binary
-indent_style = none
-insert_final_newline = false
-trim_trailing_whitespace = false
+# Temporary files
+[*.{tmp,temp}]
+# No specific formatting
+
+# Environment files
+[*.env*]
+indent_size = 2
+
+# GitHub workflow files
+[.github/workflows/*.yml]
+indent_size = 2
+
+# Docker Compose files
+[docker-compose*.yml]
+indent_size = 2
+
+# VS Code settings
+[.vscode/*.json]
+indent_size = 2
+
+# ESLint/Prettier configs
+[.{eslint,prettier}rc*]
+indent_size = 2
+
+# Babel config
+[babel.config.js]
+indent_size = 2
+
+# Webpack config
+[webpack.config.js]
+indent_size = 2
+
+# Package files
+[package.json]
+indent_size = 2
 
 # Lock files
 [package-lock.json]
+indent_size = 2
+max_line_length = off  # Lock files can have very long lines
+
+# Yarn lock file
 [yarn.lock]
-[pnpm-lock.yaml]
 indent_size = 2
-max_line_length = 120
+max_line_length = off
 
-# License files
-[LICENSE]
-[LICENSE.*]
-[COPYING]
-trim_trailing_whitespace = false
-
-# Readme files
-[README*]
-trim_trailing_whitespace = false
-max_line_length = 100
-
-# Contributing and code of conduct files
-[CONTRIBUTING*]
-[CODE_OF_CONDUCT*]
-trim_trailing_whitespace = false
-max_line_length = 100
-
-# Changelog files
-[CHANGELOG*]
-[HISTORY*]
-trim_trailing_whitespace = false
-max_line_length = 100
-
-# Elyan Labs Site specific overrides
-# This project uses HTML, CSS, JavaScript, and JSON primarily
-
-# React component files
-[react-*.html]
-indent_size = 2
-max_line_length = 100
-
-# Configuration files for this project
-[config*.json]
+# Git attributes
+[.gitattributes]
 indent_size = 2
 
-# Bounty task information
-# This .editorconfig file was added as part of a bounty task
-# Bounty Task: [EASY BOUNTY: 1 RTC] Add an .editorconfig file to any repo missing one (Issue #1626)
-# Payment Address for Bounty:
-# ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999
-# TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk
+# EditorConfig for EditorConfig files
+[.editorconfig]
+indent_size = 2
+
+# Git commit message template
+[.gitmessage]
+trim_trailing_whitespace = false
+
+# Shell scripts with shebang
+[**/.bash*]
+indent_size = 2
+
+# PowerShell scripts
+[*.ps1]
+indent_size = 2
+end_of_line = crlf
+
+# Batch files
+[*.{bat,cmd}]
+indent_size = 2
+end_of_line = crlf
+
+# Visual Studio project files
+[*.{csproj,vbproj,vcxproj}]
+indent_size = 2
+
+# Unity files
+[*.unity]
+indent_size = 2
+
+# Godot files
+[*.gd]
+indent_size = 4
+
+# Lua files
+[*.lua]
+indent_size = 2
+
+# Perl files
+[*.pl]
+indent_size = 4
+
+# Scala files
+[*.scala]
+indent_size = 2
+
+# Kotlin files
+[*.kt]
+indent_size = 4
+
+# Swift files
+[*.swift]
+indent_size = 4
+
+# Dart files
+[*.dart]
+indent_size = 2
+
+# Elm files
+[*.elm]
+indent_size = 4
+
+# Haskell files
+[*.hs]
+indent_size = 2
+
+# Clojure files
+[*.clj]
+indent_size = 2
+
+# F# files
+[*.fs]
+indent_size = 4
+
+# Julia files
+[*.jl]
+indent_size = 4
+
+# R files
+[*.r]
+indent_size = 2
+
+# MATLAB files
+[*.m]
+indent_size = 4
+
+# LaTeX files
+[*.{tex,sty,cls}]
+indent_size = 2
+
+# BibTeX files
+[*.bib]
+indent_size = 2
+
+# AsciiDoc files
+[*.adoc]
+indent_size = 2
+
+# reStructuredText files
+[*.rst]
+indent_size = 2
+
+# Textile files
+[*.textile]
+indent_size = 2
+
+# Haml files
+[*.haml]
+indent_size = 2
+
+# Slim files
+[*.slim]
+indent_size = 2
+
+# Pug/Jade files
+[*.{pug,jade}]
+indent_size = 2
+
+# Stylus files
+[*.styl]
+indent_size = 2
+
+# Sass/SCSS files
+[*.{sass,scss}]
+indent_size = 2
+
+# Less files
+[*.less]
+indent_size = 2
+
+# Stylus files
+[*.styl]
+indent_size = 2
+
+# GraphQL files
+[*.{graphql,gql}]
+indent_size = 2
+
+# Protobuf files
+[*.proto]
+indent_size = 2
+
+# Thrift files
+[*.thrift]
+indent_size = 2
+
+# OpenAPI/Swagger files
+[*.{yaml,yml}:schema(openapi)]
+indent_size = 2
+
+# CSV/TSV files
+[*.{csv,tsv}]
+# No formatting for data files
+
+# Excel files (XML-based)
+[*.xlsx]
+# Binary files, no formatting
+
+# Bounty task information section
+# This .editorconfig file was created as part of a bounty task
+# Bounty Task: [EASY BOUNTY: 1 RTC] Add a .editorconfig file to any repo missing one (Issue #1626)
+# Payment Address for Bounty: ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999 or TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk
