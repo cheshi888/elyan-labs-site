@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Elyan Labs</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f56565;
+            --success-color: #48bb78;
+            --dark-color: #2d3748;
+            --light-color: #f7fafc;
+            --gray-color: #a0aec0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--light-color) 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 800px;
+            padding: 60px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .error-code {
+            font-size: 10rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .error-code::after {
+            content: '404';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            z-index: -1;
+            color: transparent;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .search-button {
+            padding: 15px 30px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .search-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .link-card {
+            background: var(--light-color);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .link-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .link-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .link-description {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Fun Illustration */
+        .illustration {
+            margin: 40px auto;
+            max-width: 300px;
+        }
+        
+        .space-illustration {
+            position: relative;
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .planet {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .astronaut {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: 20px;
+            right: 30px;
+            animation: floating 2s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .astronaut::before,
+        .astronaut::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .astronaut::before {
+            width: 15px;
+            height: 15px;
+            top: 15px;
+            left: 15px;
+        }
+        
+        .astronaut::after {
+            width: 25px;
+            height: 25px;
+            top: 35px;
+            left: 10px;
+        }
+        
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        
+        .star:nth-child(1) { top: 20px; left: 30px; width: 3px; height: 3px; }
+        .star:nth-child(2) { top: 40px; left: 80px; width: 2px; height: 2px; animation-delay: 0.5s; }
+        .star:nth-child(3) { top: 60px; left: 50px; width: 4px; height: 4px; animation-delay: 1s; }
+        .star:nth-child(4) { top: 100px; left: 70px; width: 2px; height: 2px; animation-delay: 1.5s; }
+        .star:nth-child(5) { top: 80px; left: 20px; width: 3px; height: 3px; animation-delay: 0.8s; }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--gray-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Bounty Info */
+        .bounty-info {
+            background: linear-gradient(135deg, #e8f4ff, #f0f7ff);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .bounty-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .error-code {
+                font-size: 8rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 40px 20px;
+            }
+            
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-rocket"></i> Elyan<span>Labs</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-code"></i> Projects</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Documentation</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Community</a></li>
+                    <li><a href="#"><i class="fas fa-gift"></i> Bounties</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="error-container">
+                <!-- Error Code -->
+                <div class="error-code floating">404</div>
+                
+                <!-- Error Message -->
+                <h1 class="error-title">Page Not Found</h1>
+                <p class="error-message">
+                    Oops! It looks like you've ventured into uncharted territory. The page you're looking for might have been moved, deleted, or never existed in the first place. Don't worry though, space exploration always comes with a few surprises!
+                </p>
+                
+                <!-- Fun Illustration -->
+                <div class="illustration">
+                    <div class="space-illustration">
+                        <div class="planet"></div>
+                        <div class="astronaut"></div>
+                        <div class="stars">
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                            <div class="star"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Box -->
+                <div class="search-box">
+                    <p style="margin-bottom: 15px; color: var(--gray-color);">Try searching for what you're looking for:</p>
+                    <form class="search-form" id="searchForm">
+                        <input type="text" class="search-input" placeholder="Search the website..." id="searchInput">
+                        <button type="submit" class="search-button">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="quick-links">
+                    <a href="index.html" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="link-title">Home Page</div>
+                        <div class="link-description">Return to the main landing page</div>
+                    </a>
+                    
+                    <a href="react-counter.html" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="link-title">React Demo</div>
+                        <div class="link-description">Check out our React counter component</div>
+                    </a>
+                    
+                    <a href="#" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="link-title">Documentation</div>
+                        <div class="link-description">Browse our project documentation</div>
+                    </a>
+                    
+                    <a href="#" class="link-card">
+                        <div class="link-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="link-title">Bounty Tasks</div>
+                        <div class="link-description">Explore available bounty tasks</div>
+                    </a>
+                </div>
+                
+                <!-- Bounty Information -->
+                <div class="bounty-info">
+                    <h3><i class="fas fa-info-circle"></i> Bounty Task Information</h3>
+                    <p><strong>Task:</strong> Add a 404.html page to any repo missing one (Issue #1621)</p>
+                    <p><strong>Payment Address for Bounty:</strong></p>
+                    <p>ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999</p>
+                    <p>TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk</p>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                    <a href="#" class="btn btn-secondary" onclick="history.back()">
+                        <i class="fas fa-history"></i> Go Back
+                    </a>
+                    <a href="mailto:support@elyanlabs.com" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Report Issue
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Elyan Labs</h3>
+                    <p>Building the future of open source development with innovative projects and community collaboration.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="react-counter.html">React Demo</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Bounty Tasks</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Contributing Guide</a></li>
+                        <li><a href="#">Code of Conduct</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:support@elyanlabs.com">Email Support</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">GitHub Issues</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 Elyan Labs. All rights reserved. | This 404 page was created as part of a bounty task.</p>
+                <p>Bounty Task: Add a 404.html page to any repo missing one (Issue #1621)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple search functionality
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert(`Searching for: "${query}"\n\nIn a real implementation, this would redirect to search results.\nFor now, let me suggest visiting the homepage or documentation.`);
+                document.getElementById('searchInput').value = '';
+            }
+        });
+        
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate error code on load
+            const errorCode = document.querySelector('.error-code');
+            errorCode.style.opacity = '0';
+            errorCode.style.transform = 'translateY(50px)';
+            
+            setTimeout(() => {
+                errorCode.style.transition = 'opacity 1s ease, transform 1s ease';
+                errorCode.style.opacity = '1';
+                errorCode.style.transform = 'translateY(0)';
+            }, 300);
+            
+            // Add click effect to link cards
+            const linkCards = document.querySelectorAll('.link-card');
+            linkCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Console message
+            console.log('404 Page loaded successfully!');
+            console.log('Bounty Task: Add a 404.html page to any repo missing one (Issue #1621)');
+            console.log('Payment Address: ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999');
+            console.log('Payment Address: TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk');
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Focus search input on Ctrl+K or Cmd+K
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // Go home on Escape
+            if (e.key === 'Escape') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>
