@@ -1,0 +1,250 @@
+# EditorConfig is a file format and collection of code editor plugins
+# that helps maintain consistent coding styles across different editors and IDEs.
+# For more information, see https://editorconfig.org/
+
+root = true
+
+# Top-level configuration
+[*]
+# Set default charset
+charset = utf-8
+# End of line sequence
+end_of_line = lf
+# Indentation style: space or tab
+indent_style = space
+# Size of each indentation level
+indent_size = 2
+# Remove trailing whitespace characters
+trim_trailing_whitespace = true
+# Ensure files end with a newline character
+insert_final_newline = true
+# Maximum line length (soft limit)
+max_line_length = 80
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = 100
+
+# Makefiles
+[Makefile]
+indent_style = tab
+
+# Batch files (Windows)
+[*.bat]
+end_of_line = crlf
+
+# Shell scripts
+[*.sh]
+# Shell scripts typically use tabs for heredoc indentation
+indent_style = tab
+
+# JSON files
+[*.json]
+indent_size = 2
+
+# YAML files
+[*.yaml]
+[*.yml]
+indent_size = 2
+
+# XML files
+[*.xml]
+indent_size = 2
+
+# HTML files
+[*.html]
+indent_size = 2
+max_line_length = 120
+
+# CSS files
+[*.css]
+indent_size = 2
+
+# JavaScript/TypeScript files
+[*.js]
+[*.jsx]
+[*.ts]
+[*.tsx]
+indent_size = 2
+max_line_length = 100
+
+# JavaScript Object Notation (JSON) with Comments
+[*.jsonc]
+indent_size = 2
+
+# JSON5 files
+[*.json5]
+indent_size = 2
+
+# Python files
+[*.py]
+indent_size = 4
+max_line_length = 88
+
+# Ruby files
+[*.rb]
+indent_size = 2
+
+# Rust files
+[*.rs]
+indent_size = 4
+max_line_length = 100
+
+# Go files
+[*.go]
+indent_style = tab
+indent_size = 4
+
+# Java files
+[*.java]
+indent_size = 4
+
+# C/C++ files
+[*.c]
+[*.cpp]
+[*.h]
+[*.hpp]
+indent_size = 4
+
+# C# files
+[*.cs]
+indent_size = 4
+
+# PHP files
+[*.php]
+indent_size = 4
+
+# Swift files
+[*.swift]
+indent_size = 4
+
+# Kotlin files
+[*.kt]
+[*.kts]
+indent_size = 4
+
+# Scala files
+[*.scala]
+indent_size = 2
+
+# Haskell files
+[*.hs]
+indent_size = 4
+
+# Lua files
+[*.lua]
+indent_size = 2
+
+# SQL files
+[*.sql]
+indent_size = 2
+max_line_length = 100
+
+# Dockerfiles
+[Dockerfile]
+[*.dockerfile]
+indent_size = 4
+
+# Git configuration
+[.gitattributes]
+[.gitignore]
+[.gitmodules]
+indent_style = tab
+
+# Configuration files
+[.editorconfig]
+[*.ini]
+[*.cfg]
+[*.conf]
+indent_style = space
+indent_size = 2
+
+# Documentation files
+[*.txt]
+[*.rst]
+trim_trailing_whitespace = false
+
+# CSV files
+[*.csv]
+trim_trailing_whitespace = false
+
+# TSV files
+[*.tsv]
+trim_trailing_whitespace = false
+
+# Log files
+[*.log]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# Image and binary files (should not be touched)
+[*.png]
+[*.jpg]
+[*.jpeg]
+[*.gif]
+[*.bmp]
+[*.ico]
+[*.svg]
+[*.pdf]
+[*.zip]
+[*.tar]
+[*.gz]
+[*.7z]
+[*.exe]
+[*.dll]
+[*.so]
+[*.dylib]
+charset = binary
+indent_style = none
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Lock files
+[package-lock.json]
+[yarn.lock]
+[pnpm-lock.yaml]
+indent_size = 2
+max_line_length = 120
+
+# License files
+[LICENSE]
+[LICENSE.*]
+[COPYING]
+trim_trailing_whitespace = false
+
+# Readme files
+[README*]
+trim_trailing_whitespace = false
+max_line_length = 100
+
+# Contributing and code of conduct files
+[CONTRIBUTING*]
+[CODE_OF_CONDUCT*]
+trim_trailing_whitespace = false
+max_line_length = 100
+
+# Changelog files
+[CHANGELOG*]
+[HISTORY*]
+trim_trailing_whitespace = false
+max_line_length = 100
+
+# Elyan Labs Site specific overrides
+# This project uses HTML, CSS, JavaScript, and JSON primarily
+
+# React component files
+[react-*.html]
+indent_size = 2
+max_line_length = 100
+
+# Configuration files for this project
+[config*.json]
+indent_size = 2
+
+# Bounty task information
+# This .editorconfig file was added as part of a bounty task
+# Bounty Task: [EASY BOUNTY: 1 RTC] Add an .editorconfig file to any repo missing one (Issue #1626)
+# Payment Address for Bounty:
+# ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999
+# TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk
