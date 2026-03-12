@@ -1,0 +1,190 @@
+# Docker Compose configuration for Elyan Labs Site
+# Multi-service setup for development and production
+
+version: '3.8'
+
+# Network for all services
+networks:
+  elyan-network:
+    driver: bridge
+    name: elyan-labs-network
+
+# Volumes for persistent data
+volumes:
+  node_modules:
+  app_data:
+
+# Main application service
+services:
+  # Production web server
+  web:
+    build:
+      context: .
+      target: production
+    image: elyan-labs-site:latest
+    container_name: elyan-labs-site
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+    networks:
+      - elyan-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    volumes:
+      - app_data:/app/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    labels:
+      - "com.elyanlabs.description=Elyan Labs Site Web Server"
+      - "com.elyanlabs.role=web"
+
+  # Development environment
+  dev:
+    build:
+      context: .
+      target: development
+    container_name: elyan-labs-site-dev
+    ports:
+      - "3001:3000"
+      - "9229:9229"  # Node.js debug port
+    environment:
+      - NODE_ENV=development
+      - DEBUG=*
+      - PORT=3000
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - elyan-network
+    command: npx serve -s . -l 3000
+    stdin_open: true
+    tty: true
+    labels:
+      - "com.elyanlabs.description=Elyan Labs Site Development Environment"
+
+  # Test environment
+  test:
+    build:
+      context: .
+      target: test
+    container_name: elyan-labs-site-test
+    environment:
+      - NODE_ENV=test
+      - CI=true
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - elyan-network
+    command: npm test
+    labels:
+      - "com.elyanlabs.description=Elyan Labs Site Test Runner"
+
+  # Linting service
+  lint:
+    build:
+      context: .
+      target: lint
+    container_name: elyan-labs-site-lint
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    networks:
+      - elyan-network
+    command: npm run lint
+    labels:
+      - "com.elyanlabs.description=Elyan Labs Site Linter"
+
+  # Nginx reverse proxy (optional)
+  nginx:
+    image: nginx:alpine
+    container_name: elyan-labs-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    networks:
+      - elyan-network
+    depends_on:
+      - web
+    labels:
+      - "com.elyanlabs.description=NGINX Reverse Proxy"
+
+  # Database (optional - if needed)
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: elyan-labs-db
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_DB=elyan_labs
+  #     - POSTGRES_USER=elyan
+  #     - POSTGRES_PASSWORD=changeme
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - elyan-network
+  #   ports:
+  #     - "5432:5432"
+  #   labels:
+  #     - "com.elyanlabs.description=PostgreSQL Database"
+
+  # Redis cache (optional)
+  # redis:
+  #   image: redis:alpine
+  #   container_name: elyan-labs-redis
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - elyan-network
+  #   labels:
+  #     - "com.elyanlabs.description=Redis Cache"
+
+  # Monitoring (optional)
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: elyan-labs-prometheus
+  #   ports:
+  #     - "9090:9090"
+  #   volumes:
+  #     - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  #   networks:
+  #     - elyan-network
+  #   labels:
+  #     - "com.elyanlabs.description=Prometheus Monitoring"
+
+  # Grafana dashboard (optional)
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: elyan-labs-grafana
+  #   ports:
+  #     - "3001:3000"
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=admin
+  #   volumes:
+  #     - grafana_data:/var/lib/grafana
+  #   networks:
+  #     - elyan-network
+  #   depends_on:
+  #     - prometheus
+  #   labels:
+  #     - "com.elyanlabs.description=Grafana Dashboard"
+
+# Bounty task information
+# This docker-compose.yml file was created as part of a bounty task
+# Bounty Task: [EASY BOUNTY: 1 RTC] Add a Dockerfile to any repo missing one (Issue #1629)
+# Payment Address for Bounty: ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999 or TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk
