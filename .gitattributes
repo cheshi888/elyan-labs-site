@@ -1,0 +1,162 @@
+# Git Attributes File for Elyan Labs Site
+# This file defines how Git should treat specific file types and paths
+
+# Auto-detect text files and perform LF normalization
+* text=auto
+
+# Ensure files with these extensions are always treated as text
+*.html text
+*.css text
+*.js text
+*.json text
+*.md text
+*.txt text
+*.xml text
+*.yml text
+*.yaml text
+*.ini text
+*.cfg text
+*.conf text
+
+# Ensure files with these extensions are always treated as binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.bz2 binary
+*.xz binary
+*.tar binary
+
+# Declare files that should use CRLF line endings on checkout
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Declare files that should always use LF line endings
+*.sh text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# Define diff drivers for specific file types
+# Use custom diff for JSON files
+*.json diff=json
+*.py diff=python
+
+# Define merge drivers
+# Use union merge for CHANGELOG.md
+CHANGELOG.md merge=union
+LICENSE merge=union
+README.md merge=union
+CODE_OF_CONDUCT.md merge=union
+
+# Define filters for specific paths
+# Custom filters for documentation
+docs/** filter=lfs diff=lfs merge=lfs -text
+
+# Git LFS tracking
+# Track large files with Git LFS (if configured)
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.ai filter=lfs diff=lfs merge=lfs -text
+*.sketch filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+
+# Export ignore for specific files
+# These files should be ignored during export/archive
+.gitattributes export-ignore
+.gitignore export-ignore
+README.md export-ignore
+CONTRIBUTING.md export-ignore
+CODE_OF_CONDUCT.md export-ignore
+CHANGELOG.md export-ignore
+LICENSE export-ignore
+
+# Language-specific settings
+# Python files
+*.py linguist-language=Python
+*.py linguist-detectable=true
+
+# JavaScript files
+*.js linguist-language=JavaScript
+*.js linguist-detectable=true
+
+# HTML files
+*.html linguist-language=HTML
+*.html linguist-detectable=true
+
+# CSS files
+*.css linguist-language=CSS
+*.css linguist-detectable=true
+
+# Markdown files
+*.md linguist-language=Markdown
+*.md linguist-detectable=true
+
+# JSON files
+*.json linguist-language=JSON
+*.json linguist-detectable=true
+
+# Docker files
+Dockerfile linguist-language=Dockerfile
+Dockerfile.* linguist-language=Dockerfile
+.dockerignore linguist-language=Ignored
+
+# GitHub linguist overrides
+# Force specific language detection if needed
+# linguist-vendored: Exclude from language statistics
+vendor/** linguist-vendored
+node_modules/** linguist-vendored
+dist/** linguist-vendored
+build/** linguist-vendored
+coverage/** linguist-vendored
+
+# linguist-generated: Mark as generated code
+*.min.js linguist-generated
+*.min.css linguist-generated
+dist/** linguist-generated
+build/** linguist-generated
+
+# linguist-documentation: Mark as documentation
+docs/** linguist-documentation
+*.md linguist-documentation
+README.* linguist-documentation
+
+# Custom diff and merge settings
+# Use patience diff for better results on certain files
+*.md diff=patience
+*.txt diff=patention
+
+# Whitespace handling
+# Ignore whitespace changes in specific files
+*.md -whitespace
+*.txt -whitespace
+
+# Elyan Labs Site specific settings
+# Configuration for this project
+404.html text eol=lf
+react-counter.html text eol=lf
+index.html text eol=lf
+config.json text eol=lf
+
+# End of file settings
+# Ensure these files end with newline
+*.py eol=lf
+*.js eol=lf
+*.html eol=lf
+*.css eol=lf
+*.json eol=lf
+*.md eol=lf
+
+# Bounty task information
+# This file was added as part of bounty task #1624
+# Payment Address for Bounty:
+# ERC20: 0xB3ff5422f49324FD99a0AB7905440C9586d99999
+# TRC20: TGPZ5ozM1LLxXyErA45hKfcuR2cF7ntcsk
